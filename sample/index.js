@@ -5,7 +5,7 @@ const mongoose = require('mongoose-fill');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/myapp');
 
-let rest = require('../')({
+let rest = require('../')({ // require('koa-restful')
     router: {
       prefix: '/'
     },
