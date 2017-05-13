@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "koa": "^2.2.0",
-    "mongoose": "^4.9.8",
     "mongoose-fill": "^1.6.0"
   }
 }
