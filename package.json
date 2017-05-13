@@ -1,0 +1,34 @@
+{
+  "name": "koa-resftul",
+  "version": "0.0.1",
+  "description": "koa rest router with mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lwhiteley/koa-resftul.git"
+  },
+  "keywords": [
+    "koa",
+    "rest",
+    "mongoose"
+  ],
+  "author": "Layton Whiteley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lwhiteley/koa-resftul/issues"
+  },
+  "homepage": "https://github.com/lwhiteley/koa-resftul#readme",
+  "dependencies": {
+    "koa-better-body": "^3.0.2",
+    "koa-rest-router": "^1.0.1",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "koa": "^2.2.0",
+    "mongoose": "^4.9.8",
+    "mongoose-fill": "^1.6.0"
+  }
+}
