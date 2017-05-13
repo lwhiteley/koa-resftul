@@ -6,7 +6,12 @@ const filterReadOnlyFields = (ctx, options) => {
     var defaultOmits = ["_id", "id", "__v", "createdAt", "password"]
     var omitFields = _.union(defaultOmits, options.readOnly || [])
     return _.omit(ctx.request.fields, omitFields)
-}
+};
+
+const getIdFromReq = (ctx, schema) => {
+    return ctx.params[schema.modelName.toLowerCase()]
+};
+
 const cntrlGenerator = ({schema, options = {}}, self) => {
     let ctrl = {
         // GET /models
@@ -56,8 +61,9 @@ const cntrlGenerator = ({schema, options = {}}, self) => {
         update: [
             body,
             (ctx, next) => {
+                const id = getIdFromReq(ctx, schema);
                 return schema
-                    .findById({_id: ctx.params[schema.modelName.toLowerCase()]})
+                    .findById({_id: id})
                     .then((instance) => {
                         const newFields = filterReadOnlyFields(ctx, options);
                         instance = _.merge(instance, newFields);
@@ -91,8 +97,9 @@ const cntrlGenerator = ({schema, options = {}}, self) => {
         show: [
             body,
             (ctx, next) => {
+                const id = getIdFromReq(ctx, schema);
                 return schema
-                    .findById({_id: ctx.params[schema.modelName.toLowerCase()]})
+                    .findById({_id: id})
                     .then((model) => {
                         ctx.body = model
                         return next();
@@ -108,7 +115,7 @@ const cntrlGenerator = ({schema, options = {}}, self) => {
         remove: [
             body,
             (ctx, next) => {
-                const id = ctx.params[schema.modelName.toLowerCase()]
+                const id = getIdFromReq(ctx, schema);
                 return schema
                     .remove({_id: id})
                     .then((model) => {
