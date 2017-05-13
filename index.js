@@ -2,6 +2,9 @@ const Router = require('koa-rest-router');
 const assign = require('lodash/assign');
 const ctrlFactory = require('./lib/ctrl-factory')
 
+const defaultHiddenFields = ["__v", "password"];
+const defaultReadOnlyFields = ["_id", "id", "__v", "createdAt", "updatedAt", "password"];
+
 function KoaRestful (options = {}) {
   if (!(this instanceof KoaRestful)) {
     return new KoaRestful(options)
@@ -9,8 +12,8 @@ function KoaRestful (options = {}) {
   const defaultOptions = {
       router: {},
       models: [],
-      defaultHiddenFields: ["__v", "password"],
-      defaultReadOnlyFields: ["_id", "id", "__v", "createdAt", "updatedAt", "password"]
+      defaultHiddenFields: defaultHiddenFields,
+      defaultReadOnlyFields: defaultReadOnlyFields
   };
 
   this.errHandler = options.errorHandler || ((err) => err);
@@ -27,5 +30,8 @@ function KoaRestful (options = {}) {
 KoaRestful.prototype.getApi = () => {
     return this.api;
 }
+
+KoaRestful.defaultHiddenFields = defaultHiddenFields
+KoaRestful.defaultReadOnlyFields = defaultReadOnlyFields
 
 module.exports = KoaRestful

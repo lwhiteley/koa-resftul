@@ -5,15 +5,17 @@ const mongoose = require('mongoose-fill');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/myapp');
 
-let rest = require('../')({ // require('koa-restful')
+let Rest = require('../') // require('koa-restful')
+const rest = Rest({ 
     router: {
       prefix: '/'
     },
     models: [
         require('./user.model')
-    ]
+    ],
+    defaultHiddenFields: Rest.defaultHiddenFields.concat(["salt"]),
+    defaultReadOnlyFields: Rest.defaultReadOnlyFields.concat(["salt"])
 })
-
 const api = rest.api;
 app.use(api.middleware())
 
